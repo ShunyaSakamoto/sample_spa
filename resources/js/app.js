@@ -1,5 +1,7 @@
 import Vue from "vue";
+import VueRouter from "vue-router";
 import HeaderComponent from "./components/HeaderComponent";
+import TaskListComponent from "./components/TaskListComponent";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -10,6 +12,19 @@ import HeaderComponent from "./components/HeaderComponent";
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+Vue.use(VueRouter);
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: "/tasks",
+            name: "task.list",
+            component: TaskListComponent
+        },
+    ]
+});
 
 /**
  * The following block of code may be used to automatically register your
@@ -33,4 +48,5 @@ Vue.component('header-component', HeaderComponent);
 
 const app = new Vue({
     el: '#app',
+    router
 });
