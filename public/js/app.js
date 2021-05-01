@@ -1996,10 +1996,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      task: {}
+      inputClass: {
+        title: 'form-control',
+        content: 'form-control',
+        person_in_charge: 'form-control'
+      },
+      task: {},
+      validationErrors: {}
     };
   },
   methods: {
@@ -2010,6 +2031,26 @@ __webpack_require__.r(__webpack_exports__);
         _this.$router.push({
           name: 'task.list'
         });
+      })["catch"](function (e) {
+        _this.validationErrors = e.response.data.errors;
+
+        if (e.response.data.errors.title == null) {
+          _this.inputClass.title = 'form-control';
+        } else {
+          _this.inputClass.title = 'form-control is-invalid';
+        }
+
+        if (e.response.data.errors.content == null) {
+          _this.inputClass.content = 'form-control';
+        } else {
+          _this.inputClass.content = 'form-control is-invalid';
+        }
+
+        if (e.response.data.errors.person_in_charge == null) {
+          _this.inputClass.person_in_charge = 'form-control';
+        } else {
+          _this.inputClass.person_in_charge = 'form-control is-invalid';
+        }
       });
     }
   }
@@ -38012,27 +38053,44 @@ var render = function() {
                 [_vm._v("Title")]
               ),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.task.title,
-                    expression: "task.title"
-                  }
-                ],
-                staticClass: "col-sm-9 form-control",
-                attrs: { type: "text", id: "title", autocomplete: "Off" },
-                domProps: { value: _vm.task.title },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c("div", { staticClass: "col-sm-9" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.task.title,
+                      expression: "task.title"
                     }
-                    _vm.$set(_vm.task, "title", $event.target.value)
+                  ],
+                  class: _vm.inputClass.title,
+                  attrs: { type: "text", id: "title", autocomplete: "Off" },
+                  domProps: { value: _vm.task.title },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.task, "title", $event.target.value)
+                    }
                   }
-                }
-              })
+                }),
+                _vm._v(" "),
+                _vm.validationErrors.title != null
+                  ? _c(
+                      "span",
+                      {
+                        staticClass: "invalid-feedback",
+                        attrs: { role: "alert" }
+                      },
+                      [
+                        _c("strong", [
+                          _vm._v(_vm._s(_vm.validationErrors.title[0]))
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group row" }, [
@@ -38045,27 +38103,44 @@ var render = function() {
                 [_vm._v("Content")]
               ),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.task.content,
-                    expression: "task.content"
-                  }
-                ],
-                staticClass: "col-sm-9 form-control",
-                attrs: { type: "text", id: "content" },
-                domProps: { value: _vm.task.content },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c("div", { staticClass: "col-sm-9" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.task.content,
+                      expression: "task.content"
                     }
-                    _vm.$set(_vm.task, "content", $event.target.value)
+                  ],
+                  class: _vm.inputClass.content,
+                  attrs: { type: "text", id: "content" },
+                  domProps: { value: _vm.task.content },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.task, "content", $event.target.value)
+                    }
                   }
-                }
-              })
+                }),
+                _vm._v(" "),
+                _vm.validationErrors.content != null
+                  ? _c(
+                      "span",
+                      {
+                        staticClass: "invalid-feedback",
+                        attrs: { role: "alert" }
+                      },
+                      [
+                        _c("strong", [
+                          _vm._v(_vm._s(_vm.validationErrors.content[0]))
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group row" }, [
@@ -38078,27 +38153,50 @@ var render = function() {
                 [_vm._v("Person In Charge")]
               ),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.task.person_in_charge,
-                    expression: "task.person_in_charge"
-                  }
-                ],
-                staticClass: "col-sm-9 form-control",
-                attrs: { type: "text", id: "person-in-charge" },
-                domProps: { value: _vm.task.person_in_charge },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c("div", { staticClass: "col-sm-9" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.task.person_in_charge,
+                      expression: "task.person_in_charge"
                     }
-                    _vm.$set(_vm.task, "person_in_charge", $event.target.value)
+                  ],
+                  class: _vm.inputClass.person_in_charge,
+                  attrs: { type: "text", id: "person-in-charge" },
+                  domProps: { value: _vm.task.person_in_charge },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.task,
+                        "person_in_charge",
+                        $event.target.value
+                      )
+                    }
                   }
-                }
-              })
+                }),
+                _vm._v(" "),
+                _vm.validationErrors.person_in_charge != null
+                  ? _c(
+                      "span",
+                      {
+                        staticClass: "invalid-feedback",
+                        attrs: { role: "alert" }
+                      },
+                      [
+                        _c("strong", [
+                          _vm._v(
+                            _vm._s(_vm.validationErrors.person_in_charge[0])
+                          )
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              ])
             ]),
             _vm._v(" "),
             _c(
