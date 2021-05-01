@@ -10,7 +10,7 @@
                     </div>
                     <div class="form-group row">
                         <label for="title" class="col-sm-3 col-form-label">Title</label>
-                        <input type="text" class="col-sm-9 form-control" id="title">
+                        <input type="text" class="col-sm-9 form-control" id="title" autocomplete="Off">
                     </div>
                     <div class="form-group row">
                         <label for="content" class="col-sm-3 col-form-label">Content</label>
