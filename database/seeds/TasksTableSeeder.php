@@ -12,16 +12,16 @@ class TasksTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= 10; $i++)
+        DB::table('tasks')->delete();
+        $faker = Faker\Factory::create('ja_JP');
+     
+        for ($i = 0; $i < 1000; $i++)
         {
-            $param = [
-            'title' => 'title' . $i,
-            'content' => 'content' . $i,
-            'person_in_charge' => 'person_in_charge' . $i,
-            ];
-            $task = new Task();
-            
-            $task->fill($param)->save();
+            Task::create([
+                'title' => $faker->word,
+                'content' => $faker->sentence,
+                'person_in_charge' => $faker->name,
+            ]);
         }
     }
 }
