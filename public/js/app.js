@@ -2181,19 +2181,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      tasks: []
+      tasks: [],
+      current_page: 1,
+      last_page: 1,
+      total: 1,
+      from: 0,
+      to: 0
     };
   },
   methods: {
-    getTasks: function getTasks() {
+    getTasks: function getTasks(page) {
       var _this = this;
 
-      axios.get('/api/tasks').then(function (res) {
-        _this.tasks = res.data;
+      axios.get('/api/tasks?page=' + page).then(function (res) {
+        _this.tasks = res.data.data;
+        _this.current_page = res.data.current_page;
+        _this.last_page = res.data.last_page;
+        _this.total = res.data.total;
+        _this.from = res.data.from;
+        _this.to = res.data.to;
       });
+    },
+    change: function change(page) {
+      if (page >= 1 && page <= this.last_page) this.getTasks(page);
     },
     deleteTask: function deleteTask(id) {
       var _this2 = this;
@@ -2203,8 +2232,18 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
+  computed: {
+    pages: function pages() {
+      var start = _.max([this.current_page - 5, 1]);
+
+      var end = _.min([start + 10, this.last_page + 1]);
+
+      start = _.max([end - 10, 1]);
+      return _.range(start, end);
+    }
+  },
   mounted: function mounted() {
-    this.getTasks();
+    this.getTasks(1);
   }
 });
 
@@ -38418,6 +38457,132 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+          _c(
+            "ul",
+            { staticClass: "pagination" },
+            [
+              _c("li", { class: { disabled: _vm.current_page <= 1 } }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.change(1)
+                      }
+                    }
+                  },
+                  [_vm._v("«")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { class: { disabled: _vm.current_page <= 1 } }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.change(_vm.current_page - 1)
+                      }
+                    }
+                  },
+                  [_vm._v("<")]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.pages, function(page) {
+                return _c(
+                  "li",
+                  { key: page, class: { active: page === _vm.current_page } },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "page-link",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.change(page)
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(page))]
+                    )
+                  ]
+                )
+              }),
+              _vm._v(" "),
+              _c(
+                "li",
+                { class: { disabled: _vm.current_page >= _vm.last_page } },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.change(_vm.current_page + 1)
+                        }
+                      }
+                    },
+                    [_vm._v(">")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { class: { disabled: _vm.current_page >= _vm.last_page } },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.change(_vm.last_page)
+                        }
+                      }
+                    },
+                    [_vm._v("»")]
+                  )
+                ]
+              )
+            ],
+            2
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "col text-right",
+          staticStyle: { "margin-top": "10px" }
+        },
+        [
+          _vm._v(
+            "全 " +
+              _vm._s(_vm.total) +
+              " 件中 " +
+              _vm._s(_vm.from) +
+              " 〜 " +
+              _vm._s(_vm.to) +
+              " 件表示"
+          )
+        ]
+      )
+    ]),
+    _vm._v(" "),
     _c("table", { staticClass: "table table-hover" }, [
       _vm._m(0),
       _vm._v(" "),

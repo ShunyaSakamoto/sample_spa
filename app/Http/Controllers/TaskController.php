@@ -10,7 +10,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        return Task::all();
+        return Task::Paginate(10);
     }
 
     public function show(Task $task)
