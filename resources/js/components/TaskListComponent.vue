@@ -89,9 +89,9 @@
         },
         computed: {
             pages() {
-                let start = _.max([this.current_page - 5, 1])
-                let end = _.min([start + 10, this.last_page + 1])
-                start = _.max([end - 10, 1])
+                let start = _.max([this.current_page - 2, 1])
+                let end = _.min([start + 5, this.last_page + 1])
+                start = _.max([end - 5, 1])
                 return _.range(start, end)
             }
         },

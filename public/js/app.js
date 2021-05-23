@@ -2234,11 +2234,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     pages: function pages() {
-      var start = _.max([this.current_page - 5, 1]);
+      var start = _.max([this.current_page - 2, 1]);
 
-      var end = _.min([start + 10, this.last_page + 1]);
+      var end = _.min([start + 5, this.last_page + 1]);
 
-      start = _.max([end - 10, 1]);
+      start = _.max([end - 5, 1]);
       return _.range(start, end);
     }
   },
